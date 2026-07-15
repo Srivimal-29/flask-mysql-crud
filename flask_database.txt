@@ -1,0 +1,12 @@
+create database flaskdb;
+
+use flaskdb;
+
+create table users(
+id int auto_increment primary key,
+Name varchar(100) not null,
+Email varchar(100) not null unique,
+Password varchar(255) not null
+);
+
+show tables;
