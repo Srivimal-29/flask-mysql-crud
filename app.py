@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql
+import os
 
 app = Flask(__name__)
 app.secret_key = "secret123"  # needed for flash messages
@@ -7,10 +8,10 @@ app.secret_key = "secret123"  # needed for flash messages
 # ---------- Database Connection ----------
 def get_connection():
     return pymysql.connect(
-        host="localhost",     # change if using remote DB
-        user="root",          # your MySQL username
-        password="root",      # your MySQL password
-        database="flaskdb"    # database you created
+        host=os.environ.get("DB_HOST", "localhost"),
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ.get("DB_PASS", "root"),
+        database=os.environ.get("DB_NAME", "flaskdb")
     )
 
 # ---------- Routes ----------
